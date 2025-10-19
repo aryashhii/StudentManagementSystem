@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Student Management System
 
 A web based application built with Flask and MySQL to manage student results.
@@ -19,7 +18,4 @@ folder structure
 │   └── view_results.html
 ├── static/ (optional)  
    
-=======
-# StudentManagementSystem
-A Flask based web app for managing student results with MySQL integration.
->>>>>>> aa6ad9f26604290d74047537a11547a21267df76
+
