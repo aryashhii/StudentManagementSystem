@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Results | Student Result Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 20px;
+    }
+    h2 { text-align: center; color: #333; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+      font-size: 12px;
+    }
+    th { background-color: #4CAF50; color: white; }
+    tr:hover { background-color: #f1f1f1; }
+    button {
+      padding: 5px 10px;
+      margin: 2px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      color: white;
+    }
+    .add-btn { background-color: #4CAF50; }
+    .update-btn { background-color: #2196F3; }
+    .delete-btn { background-color: #f44336; }
+    input[type="text"], input[type="number"] {
+      width: 80px;
+    }
+    form { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Manage Student Results</h2>
+
+  <table>
+    <tr>
+      <th>Student ID</th>
+      <th>Roll Number</th>
+      <th>Class</th>
+      <th>DBMS</th>
+      <th>MPMC</th>
+      <th>CN</th>
+      <th>JAVA</th>
+      <th>DATA STRUCTURE</th>
+      <th>FLAT</th>
+      <th>SS LAB</th>
+      <th>DBMS LAB</th>
+      <th>SGPA</th>
+      <th>Actions</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+      <td>{{ student.student_id }}</td>
+      <td>{{ student.roll_number }}</td>
+      <td>{{ student.class_name }}</td>
+      <td>{{ student.dbms }}</td>
+      <td>{{ student.mpmc }}</td>
+      <td>{{ student.cn }}</td>
+      <td>{{ student.java }}</td>
+      <td>{{ student.data_structure }}</td>
+      <td>{{ student.flat }}</td>
+      <td>{{ student.ss_lab }}</td>
+      <td>{{ student.dbms_lab }}</td>
+      <td>{{ student.sgpa }}</td>
+      <td>
+        <button class="update-btn" onclick="populateEditForm(this)">Edit</button>
+        <a href="/delete/{{ student.student_id }}"><button class="delete-btn">Delete</button></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h3>Add New Student</h3>
+  <form action="/add" method="POST">
+    <input type="text" name="student_id" placeholder="ID" required>
+    <input type="text" name="roll_no" placeholder="Roll No" required>
+    <input type="text" name="class_name" placeholder="Class" required>
+    <input type="number" name="dbms" placeholder="DBMS" required>
+    <input type="number" name="mpmc" placeholder="MPMC" required>
+    <input type="number" name="cn" placeholder="CN" required>
+    <input type="number" name="java" placeholder="JAVA" required>
+    <input type="number" name="ds" placeholder="DS" required>
+    <input type="number" name="flat" placeholder="FLAT" required>
+    <input type="number" name="ss_lab" placeholder="SS LAB" required>
+    <input type="number" name="dbms_lab" placeholder="DBMS LAB" required>
+    <input type="text" name="sgpa" placeholder="SGPA" required>
+    <button class="add-btn" type="submit">Add</button>
+  </form>
+
+  <h3>Edit Student</h3>
+  <form id="editForm" action="/update" method="POST" style="display:none;">
+    <input type="text" id="edit_student_id" name="student_id" readonly>
+    <input type="text" id="edit_roll_no" name="roll_no" required>
+    <input type="text" id="edit_class_name" name="class_name" required>
+    <input type="number" id="edit_dbms" name="dbms" required>
+    <input type="number" id="edit_mpmc" name="mpmc" required>
+    <input type="number" id="edit_cn" name="cn" required>
+    <input type="number" id="edit_java" name="java" required>
+    <input type="number" id="edit_ds" name="ds" required>
+    <input type="number" id="edit_flat" name="flat" required>
+    <input type="number" id="edit_ss_lab" name="ss_lab" required>
+    <input type="number" id="edit_dbms_lab" name="dbms_lab" required>
+    <input type="text" id="edit_sgpa" name="sgpa" required>
+    <button class="update-btn" type="submit">Update</button>
+    <button type="button" class="delete-btn" onclick="cancelEdit()">Cancel</button>
+  </form>
+
+  <script>
+    function populateEditForm(btn) {
+      const row = btn.parentNode.parentNode;
+      const cells = row.getElementsByTagName('td');
+      document.getElementById('edit_student_id').value = cells[0].innerText;
+      document.getElementById('edit_roll_no').value = cells[1].innerText;
+      document.getElementById('edit_class_name').value = cells[2].innerText;
+      document.getElementById('edit_dbms').value = cells[3].innerText;
+      document.getElementById('edit_mpmc').value = cells[4].innerText;
+      document.getElementById('edit_cn').value = cells[5].innerText;
+      document.getElementById('edit_java').value = cells[6].innerText;
+      document.getElementById('edit_ds').value = cells[7].innerText;
+      document.getElementById('edit_flat').value = cells[8].innerText;
+      document.getElementById('edit_ss_lab').value = cells[9].innerText;
+      document.getElementById('edit_dbms_lab').value = cells[10].innerText;
+      document.getElementById('edit_sgpa').value = cells[11].innerText;
+      document.getElementById('editForm').style.display = 'block';
+      document.getElementById('editForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function cancelEdit() {
+      document.getElementById('editForm').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

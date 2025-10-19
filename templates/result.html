@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Results | Student Result Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    th, td {
+      padding: 8px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      font-size: 12px;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 13px;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    .update-btn {
+      background-color: #2196F3;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Student Result Table</h2>
+
+  <a href="/manage">
+    <button class="update-btn">Go to Manage Page</button>
+  </a>
+
+  <table>
+    <tr>
+      <th>Student ID</th>
+      <th>Roll Number</th>
+      <th>Class</th>
+      <th>DBMS</th>
+      <th>MPMC</th>
+      <th>CN</th>
+      <th>JAVA</th>
+      <th>DATA STRUCTURE</th>
+      <th>FLAT</th>
+      <th>SS LAB</th>
+      <th>DBMS LAB</th>
+      <th>SGPA</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+      <td>{{ student.student_id }}</td>
+      <td>{{ student.roll_number }}</td>
+      <td>{{ student.class_name }}</td>
+      <td>{{ student.dbms }}</td>
+      <td>{{ student.mpmc }}</td>
+      <td>{{ student.cn }}</td>
+      <td>{{ student.java }}</td>
+      <td>{{ student.data_structure }}</td>
+      <td>{{ student.flat }}</td>
+      <td>{{ student.ss_lab }}</td>
+      <td>{{ student.dbms_lab }}</td>
+      <td>{{ student.sgpa }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
